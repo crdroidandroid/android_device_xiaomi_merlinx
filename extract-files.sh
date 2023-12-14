@@ -9,7 +9,7 @@
 function blob_fixup() {
     case "${1}" in
         vendor/bin/mnld)
-            "${PATCHELF}" --replace-needed "libsensorndkbridge.so" "libsensorndkbridge_mtk.so" "${2}"
+            grep -q "libshim_sensors.so" "$2" || "$PATCHELF" --add-needed "libshim_sensors.so" "$2"
             ;;
     esac
 }
